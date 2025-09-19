@@ -39,8 +39,8 @@ describe('Testes de cenários de erros da API Rest a nível external', () => {
             .post('/tasks')
             .set('Authorization', `Bearer ${token}`)
             .send({
-                title: "Criação da API Rest",
-                description: "Primeira etapa do trabalho final",
+                title: "Criação dos testes external da API Rest",
+                description: "Terceira etapa do trabalho final",
                 dueDate: "2025-09-21",
                 priority: "Alta"
             });
@@ -50,8 +50,8 @@ describe('Testes de cenários de erros da API Rest a nível external', () => {
             .post('/tasks')
             .set('Authorization', `Bearer ${token}`)
             .send({
-                title: "Criação da API Rest",
-                description: "Primeira etapa do trabalho final",
+                title: "Criação dos testes external da API Rest",
+                description: "Terceira etapa do trabalho final",
                 dueDate: "2025-09-21",
                 priority: "Alta"
             });
