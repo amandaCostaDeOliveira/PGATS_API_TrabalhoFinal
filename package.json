@@ -19,7 +19,7 @@
   "scripts": {
     "test": "mocha \"test/**/*.test.js\" --timeout 10000 --reporter mochawesome",
     "test-rest-external": "mocha \"test/rest/external/**/*.test.js\" --timeout 10000 --reporter mochawesome",
-    "test-rest-external-testesErrors": "mocha \"test/rest/controller/testesErrorsExternal.test.js\" --timeout 10000 --reporter mochawesome",
+    "test-rest-external-testesErrors": "mocha \"test/rest/external/testesErrorsExternal.test.js\" --timeout 10000 --reporter mochawesome",
     "test-rest-controller": "mocha \"test/rest/controller/**/*.js\" --timeout 10000 --reporter mochawesome",
     "test-rest-controller-testesFelizes": "mocha \"test/rest/controller/testesFelizesController.test.js\" --timeout 10000 --reporter mochawesome",
     "start-rest": "node server.js"
