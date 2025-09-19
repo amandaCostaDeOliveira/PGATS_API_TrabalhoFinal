@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Executar testes de controller da API Rest
+        run: npm run test-rest-controller
+
+      # - name: Executar testes de controller da API GraphQL
+      #   run: npm run test-graphql-controller     
+
+      - name: Subir a API REST
+        run: npm run start-rest &
+
+      #- name: Subir a API GraphQL
+      #  run: npm run start-graphql &
+
+      - name: Esperar as APIs estarem funcionando
+        run: sleep 8
+
+      - name: Criar o .env
+        run: |
+          echo "BASE_URL_REST=${{ secrets.BASE_URL_REST }}" >> .env
+    #      echo "BASE_URL_GRAPHQL=${{ secrets.BASE_URL_GRAPHQL }}" >> .env
+
+    # - name: Rodar os testes externos da API Rest via HTTP
+    #    run: npm run test-rest-external
+
+    #  - name: Rodar os testes externos da API GraphQL via HTTP
+    #    run: npm run test-graphql-external
