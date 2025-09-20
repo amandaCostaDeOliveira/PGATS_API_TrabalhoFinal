@@ -1,0 +1,157 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-09-20T01:47:57.062Z",
+    "end": "2025-09-20T01:47:57.261Z",
+    "duration": 199,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "e316b5c4-89a3-4e8f-966c-1bcab743330a",
+      "title": "",
+      "fullFile": "C:\\Users\\amanda.coliveira\\Documents\\Pessoal\\PosGraduacao\\7 - Automação de Teste na Camada de Serviço (API)\\PGATS_API_TrabalhoFinal\\test\\graphql\\external\\testesErrorsExternal.test.js",
+      "file": "\\test\\graphql\\external\\testesErrorsExternal.test.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c8127e96-35d5-4dc6-b6ef-2d3c177cd950",
+          "title": "Testes de cenários de erros da API GraphQL a nível external",
+          "fullFile": "C:\\Users\\amanda.coliveira\\Documents\\Pessoal\\PosGraduacao\\7 - Automação de Teste na Camada de Serviço (API)\\PGATS_API_TrabalhoFinal\\test\\graphql\\external\\testesErrorsExternal.test.js",
+          "file": "\\test\\graphql\\external\\testesErrorsExternal.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"Testes de cenários de erros da API GraphQL a nível external\"",
+              "fullTitle": "Testes de cenários de erros da API GraphQL a nível external \"before each\" hook in \"Testes de cenários de erros da API GraphQL a nível external\"",
+              "timedOut": false,
+              "duration": 31,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// registra usuário antes de cada teste\nawait request(BASE_URL_GRAPHQL)\n  .post(\"/\")\n  .send({\n    query: `\n      mutation Register($username: String!, $password: String!) {\n        register(username: $username, password: $password)\n      }\n    `,\n    variables: {\n      username: \"Amanda\",\n      password: \"123456\",\n    },\n  });\n// login correto para capturar token (usado nos testes 2 e 3)\nconst res = await request(BASE_URL_GRAPHQL)\n  .post(\"/\") \n  .send({\n    query: `\n      mutation Login($username: String!, $password: String!) {\n        login(username: $username, password: $password) {\n          token\n        }\n      }\n    `,\n    variables: {\n      username: \"Amanda\",\n      password: \"123456\",\n    },\n  });\ntoken = res.body.data?.login?.token;",
+              "err": {},
+              "uuid": "87751a8d-3cc8-4acb-a118-d4c9cda15e2a",
+              "parentUUID": "c8127e96-35d5-4dc6-b6ef-2d3c177cd950",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "1 - Login com credenciais inválidas deve falhar",
+              "fullTitle": "Testes de cenários de erros da API GraphQL a nível external 1 - Login com credenciais inválidas deve falhar",
+              "timedOut": false,
+              "duration": 25,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const res = await request(BASE_URL_GRAPHQL)\n  .post(\"/\") \n  .send({\n    query: `\n      mutation Login($username: String!, $password: String!) {\n        login(username: $username, password: $password) {\n          token\n        }\n      }\n    `,\n    variables: {\n      username: \"Amanda\",\n      password: \"654321\",\n    },\n  });\nexpect(res.body.errors).to.be.an(\"array\");\nexpect(res.body.errors[0].message).to.equal(\"Credenciais inválidas.\");\nexpect(res.body.data).to.be.null;",
+              "err": {},
+              "uuid": "da30733c-0cc8-4846-971c-bdf0a1d6879e",
+              "parentUUID": "c8127e96-35d5-4dc6-b6ef-2d3c177cd950",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "2 - Tentativa de deletar task inexistente deve falhar",
+              "fullTitle": "Testes de cenários de erros da API GraphQL a nível external 2 - Tentativa de deletar task inexistente deve falhar",
+              "timedOut": false,
+              "duration": 7,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const res = await request(BASE_URL_GRAPHQL)\n  .post(\"/\")\n  .set(\"Authorization\", `Bearer ${token}`)\n  .send({\n    query: `\n      mutation DeleteTask($deleteTaskId: ID!) {\n        deleteTask(id: $deleteTaskId)\n      }\n    `,\n    variables: {\n      deleteTaskId: 123456,\n    },\n  });\nexpect(res.body.errors).to.be.an(\"array\");\nexpect(res.body.errors[0].message).to.equal(\"Task não encontrada.\");\nexpect(res.body.data).to.be.null;",
+              "err": {},
+              "uuid": "dcc85a89-8472-4942-9ba0-c95605c0f879",
+              "parentUUID": "c8127e96-35d5-4dc6-b6ef-2d3c177cd950",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "3 - Tentativa de atualizar task inexistente deve falhar",
+              "fullTitle": "Testes de cenários de erros da API GraphQL a nível external 3 - Tentativa de atualizar task inexistente deve falhar",
+              "timedOut": false,
+              "duration": 8,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const res = await request(BASE_URL_GRAPHQL)\n  .post(\"/\") \n  .set(\"Authorization\", `Bearer ${token}`)\n  .send({\n    query: `\n      mutation UpdateTask($updateTaskId: ID!) {\n        updateTask(id: $updateTaskId) {\n          id\n        }\n      }\n    `,\n    variables: {\n      updateTaskId: 123456,\n    },\n  });\nexpect(res.body.errors).to.be.an(\"array\");\nexpect(res.body.errors[0].message).to.equal(\"Task não encontrada.\");\nexpect(res.body.data).to.be.null;",
+              "err": {},
+              "uuid": "8a26af80-1607-41b6-9c2a-ab23bc9e4959",
+              "parentUUID": "c8127e96-35d5-4dc6-b6ef-2d3c177cd950",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "da30733c-0cc8-4846-971c-bdf0a1d6879e",
+            "dcc85a89-8472-4942-9ba0-c95605c0f879",
+            "8a26af80-1607-41b6-9c2a-ab23bc9e4959"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 40,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 10000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.7.2"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.3.0"
+    }
+  }
+}
