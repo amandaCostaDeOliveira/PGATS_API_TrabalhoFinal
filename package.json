@@ -1,8 +1,10 @@
 {
   "dependencies": {
+    "apollo-server-express": "^3.13.0",
     "bcryptjs": "^3.0.2",
     "chai": "^6.0.1",
-    "express": "^5.1.0",
+    "express": "^4.21.2",
+    "graphql": "^16.11.0",
     "jsonwebtoken": "^9.0.2",
     "mocha": "^11.7.2",
     "sinon": "^21.0.0",
@@ -22,6 +24,7 @@
     "test-rest-external-testesErrors": "mocha \"test/rest/external/testesErrorsExternal.test.js\" --timeout 10000 --reporter mochawesome",
     "test-rest-controller": "mocha \"test/rest/controller/**/*.js\" --timeout 10000 --reporter mochawesome",
     "test-rest-controller-testesFelizes": "mocha \"test/rest/controller/testesFelizesController.test.js\" --timeout 10000 --reporter mochawesome",
-    "start-rest": "node server.js"
+    "start-rest": "node server.js",
+    "start-graphql": "node graphql/server.js"
   }
 }
