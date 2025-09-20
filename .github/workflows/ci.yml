@@ -24,8 +24,8 @@ jobs:
       - name: Executar testes de controller da API Rest
         run: npm run test-rest-controller
 
-      # - name: Executar testes de controller da API GraphQL
-      #   run: npm run test-graphql-controller     
+      - name: Executar testes de controller da API GraphQL
+        run: npm run test-graphql-controller     
 
       - name: Subir a API REST
         run: npm run start-rest &
