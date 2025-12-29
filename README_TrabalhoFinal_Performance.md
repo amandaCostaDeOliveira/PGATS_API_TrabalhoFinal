@@ -137,15 +137,15 @@ responseLogin.json('token')
         );
 
 **Data-Driven Testing**
-O código abaixo está armazenado no arquivo performance\k6\trabalho-final.js e demontra o uso do conceito de Data-driven Testing, pois está recebendo os dados provenientes do arquivo externo performance\k6\data\tasks.json referente à criação das tarefas na API.
+O código abaixo está armazenado no arquivo performance\k6\trabalho-final.js e demontra o uso do conceito de Data-driven Testing, pois está recebendo os dados provenientes do arquivo externo performance\k6\data\tasks.js referente à criação das tarefas na API.
 
-group('3) Adicionando Tarefas', () => {
+    group('3) Adicionando Tarefas', () => {
         const index = __ITER % tasksData.length;
         const taskData = tasksData[index];
 
         const responseTasks = postTasks(
             {
-                title: `${taskData.title} - ${Date.now()}`,
+                title: taskData.title,
                 description: taskData.description,
                 dueDate: taskData.dueDate,
                 priority: taskData.priority,
@@ -159,6 +159,7 @@ group('3) Adicionando Tarefas', () => {
 
         postTasksDurationTrend.add(responseTasks.timings.duration);
     });
+
 
 
 **Groups**

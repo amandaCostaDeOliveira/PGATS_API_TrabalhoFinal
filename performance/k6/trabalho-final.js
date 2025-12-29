@@ -7,10 +7,10 @@ import { BASE_URL } from './helpers/baseURL.js';
 import { postTasks } from './helpers/postTasks.js'
 import { Trend } from 'k6/metrics';
 import { SharedArray } from 'k6/data';
+import tasks from './data/tasks.js';
 
 const tasksData = new SharedArray('tasks data', () => {
-    const json = open('./data/tasks.json');
-    return JSON.parse(json);
+    return tasks;
 });
 
 const postTasksDurationTrend = new Trend('post_tasks_duration');
@@ -68,7 +68,7 @@ export default function () {
 
         const responseTasks = postTasks(
             {
-                title: `${taskData.title} - ${Date.now()}`,
+                title: taskData.title,
                 description: taskData.description,
                 dueDate: taskData.dueDate,
                 priority: taskData.priority,
