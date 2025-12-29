@@ -23,38 +23,11 @@ Antes de seguir, crie um arquivo .env na raiz do projeto contendo as propriedade
 
 ## Como rodar a API REST
 
-- Para rodar em modo desenvolvimento (com auto-reload):
-	```
-	npx nodemon server.js
-	```
-- Para rodar normalmente:
-	```
-	node server.js
-	```
+- npm run start-rest
 
-## Como rodar a API GraphQL
+# Documentação Swagger: [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
 
-- Entre na pasta `graphql`:
-	```
-	cd graphql
-	```
-- Para rodar em modo desenvolvimento:
-	```
-	npx nodemon server.js
-	```
-- Para rodar normalmente:
-	```
-	node server.js
-	```
-- Acesse: [http://localhost:4000/graphql](http://localhost:4000/graphql)
-
-
-## Documentação Swagger
-
-Acesse a documentação interativa em: [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
-
-
-## Endpoints principais (REST)
+# Endpoints principais (REST)
 
 - `POST /register` — Cadastro de usuário
 - `POST /login` — Login e obtenção do token JWT
@@ -65,7 +38,13 @@ Acesse a documentação interativa em: [http://localhost:3000/api-docs](http://l
 - `DELETE /tasks/:id` — Excluir tarefa (autenticado)
 - `POST /tasks/:id/complete` — Marcar tarefa como concluída (autenticado)
 
-## Operações principais (GraphQL)
+## Como rodar a API GraphQL
+
+- npm run start-graphql
+
+# Documentação Swagger: [http://localhost:4000/graphql](http://localhost:4000/graphql)
+
+# Operações principais (GraphQL)
 
 ### Mutations
 - `register(username, password): String` — Cadastro de usuário
@@ -79,36 +58,11 @@ Acesse a documentação interativa em: [http://localhost:3000/api-docs](http://l
 - `getTasks` — Listar tarefas do usuário autenticado
 - `getTaskById(id)` — Detalhes de uma tarefa (autenticado)
 
-**Exemplo de uso (GraphQL Playground):**
-
-```graphql
-mutation {
-	register(username: "Amanda", password: "123456")
-}
-
-mutation {
-	login(username: "Amanda", password: "123456") {
-		token
-	}
-}
-
-query {
-	getTasks {
-		id
-		title
-		status
-	}
-}
-```
-
 
 ## Observações
 
 - O banco de dados é em memória (os dados são perdidos ao reiniciar o servidor).
 - Todos os endpoints de tarefas exigem autenticação JWT (enviar header: `Authorization: Bearer <token>`).
 - Para GraphQL, envie o header `Authorization: Bearer <token>` nas requisições autenticadas.
-- A documentação Swagger está disponível para a API REST.
-
----
-
-Dúvidas? Consulte o código ou a documentação Swagger!
+- A documentação Swagger está disponível.
+- Dúvidas? Consulte o código ou a documentação Swagger!

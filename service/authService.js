@@ -15,7 +15,7 @@ exports.register = (req, res) => {
   }
   const hashed = bcrypt.hashSync(password, 8);
   users.push({ username, password: hashed });
-  res.status(201).json({ message: 'Usuário registrado com sucesso.' });
+  res.status(201).json({ message: 'Usuário registrado com sucesso.', username, password });
 };
 
 exports.login = (req, res) => {
